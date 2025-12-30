@@ -46,15 +46,16 @@ struct TextInputsView: View {
 //                }
             }
         }
+        .dottedBackground()
         .frame(height: 200)
         .padding(.top, 35)
         .padding(.leading)
         .padding(.trailing)
-        .background(
-            Image("dotted-blank")
-                .resizable()
-                .scaledToFill()
-        )
+//        .background(
+//            Image("dotted-blank")
+//                .resizable()
+//                .scaledToFill()
+//        )
     }
 }
 

@@ -14,7 +14,7 @@ extension View {
         color: Color = .gray.opacity(0.25)
     ) -> some View {
         background(
-            DotsPatternView(
+            DottedBackgroundView(
                 dotSize: dotSize,
                 spacing: spacing,
                 color: color
