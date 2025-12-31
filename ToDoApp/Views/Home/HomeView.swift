@@ -49,7 +49,6 @@ struct HomeView: View {
                     .frame(height: 1)
                     .padding(.horizontal)
             }
-
             // Notes List View
             NotesListView(status: $status, category: $category, noteViewModel: NoteViewModel())
         }
@@ -74,6 +73,7 @@ struct HomeView: View {
         status: $status,
         category: $category,
         noteViewModel: NoteViewModel(),
-        repository: EmptyMockNoteRepository()
+//        repository: EmptyMockNoteRepository()
+        repository: MockNoteRepository()
     )
 }

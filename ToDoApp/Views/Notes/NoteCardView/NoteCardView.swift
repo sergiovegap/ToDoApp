@@ -21,16 +21,14 @@ struct NoteCardView: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Spacer()
-//                Text(noteViewModel.date.formatted(date: .abbreviated, time: .omitted))
                 Text(noteViewModel.date, format: .dateTime.day().month().year())
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
         }
-        .padding(.leading, 15)
-        .padding(.trailing, 15)
+        .padding()
         .frame(minHeight: 75, maxHeight: 75)
-        .frame(minWidth: 350, maxWidth: 100, alignment: .leading)
+        .frame(minWidth: 350, alignment: .leading)
         .background(RoundedRectangle(cornerRadius: 11)
         .fill(noteViewModel.status.color))
     }

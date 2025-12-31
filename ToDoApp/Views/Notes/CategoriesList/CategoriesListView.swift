@@ -20,14 +20,13 @@ struct CategoriesListView: View {
                 columns: 3,
                 alignment: .leading,
                 spacing: 15)
-              { mock in
+            { mock in
                 Text(mock.name)
                     .font(Font.system(size: 15))
                     .onTapGesture { category = mock }
-              }
+            }
             .gridCellColumns(2)
         }
-        .dottedBackground()
     }
 }
 

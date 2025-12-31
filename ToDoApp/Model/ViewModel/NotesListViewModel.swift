@@ -39,7 +39,12 @@ final class NotesListViewModel: ObservableObject {
     // Public API
     func loadNotes() {
         let domainNotes = repository.fetchNotes()
-        notes = domainNotes.map { NoteViewModel(note: $0) }
+        let vms = domainNotes.map { NoteViewModel(note: $0) }
+        notes = vms.sorted { $0.status.sortOrder < $1.status.sortOrder }
+    }
+
+    func orderNotes(for status: Status) -> [NoteViewModel] {
+        self.notes.filter { $0.status.id == status.id }
     }
 
     func toggleNote(id: UUID) {

@@ -23,18 +23,15 @@ struct TextInputsView: View {
                 Rectangle()
                     .fill(Color.gray)
                     .frame(height: 1)
-//                ScrollView {
-                    ZStack(alignment: .leading) {
-                        if description.isEmpty {
-                            VStack(alignment: .leading) {
-                                Text("Write something...")
-                                    .padding(.top, 9)
-                                    .padding(.leading, 5)
-                                    .foregroundColor(.gray)
-//                                Spacer(minLength: 60)
-                            }.zIndex(1)
-                        }
-
+                ZStack(alignment: .leading) {
+                    if description.isEmpty {
+                        VStack(alignment: .leading) {
+                            Text("Write something...")
+                                .padding(.top, 9)
+                                .padding(.leading, 5)
+                                .foregroundColor(.gray)
+                        }.zIndex(1)
+                    }
                         VStack(alignment: .leading) {
                             TextEditor(text: $description)
                                 .keyboardType(.default)
@@ -43,19 +40,12 @@ struct TextInputsView: View {
                             Spacer()
                         }.zIndex(0)
                     }
-//                }
             }
         }
-        .dottedBackground()
         .frame(height: 200)
         .padding(.top, 35)
         .padding(.leading)
         .padding(.trailing)
-//        .background(
-//            Image("dotted-blank")
-//                .resizable()
-//                .scaledToFill()
-//        )
     }
 }
 

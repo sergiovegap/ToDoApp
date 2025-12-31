@@ -24,7 +24,8 @@ struct NotesListView: View {
         status: Binding<Status>,
         category: Binding<CategoryNote>,
         noteViewModel: NoteViewModel,
-        repository: NoteRepositoryProtocol = EmptyMockNoteRepository(),
+//        repository: NoteRepositoryProtocol = EmptyMockNoteRepository(),
+        repository: NoteRepositoryProtocol = MockNoteRepository(),
     ) {
         self._status = status
         self._category = category
@@ -41,12 +42,25 @@ struct NotesListView: View {
             // If there are notes
             ScrollView {
                 LazyVGrid(columns: [.init(.flexible())]) {
-                    ForEach(notesListViewModel.notes) { note in
-                        NoteCardView(noteViewModel: note)
-                            .onTapGesture { selectedNote = note }
+                    ForEach(Status.mocks) { status in
+                        let filteredNotes = notesListViewModel.orderNotes(for: status)
+                        if !filteredNotes.isEmpty {
+                            Section {
+                                ForEach(filteredNotes) { note in
+                                    NoteCardView(noteViewModel: note)
+                                        .onTapGesture { selectedNote = note }
+                                }
+                            } header: {
+                                Text(status.title)
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.top, 10)
+                            }
+                        }
                     }
                 }
             }
+            .padding()
         }
     }
 }
@@ -60,5 +74,6 @@ struct NotesListView: View {
         status: $status,
         category: $category,
         noteViewModel: NoteViewModel(),
-        repository: EmptyMockNoteRepository())
+//        repository: EmptyMockNoteRepository())
+        repository: MockNoteRepository())
 }

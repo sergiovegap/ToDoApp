@@ -11,11 +11,24 @@ internal import SwiftUI
 // Priority Mocks
 extension Status {
 //    static let blank = Status(id: 0, color: .clear, description: "", type: .blank)
-    static let completed = Status(id: 1, color: .greenNote, description: "Completed", type: .completed)
-    static let pending = Status(id: 2, color: .yellowNote, description: "Pending", type: .pending)
-    static let incompleted = Status(id: 3, color: .redNote, description: "Incompleted", type: .incompleted)
+    static let pending = Status(id: 1, color: .yellowNote, description: "Pending", type: .pending)
+    static let incompleted = Status(id: 2, color: .redNote, description: "Incompleted", type: .incompleted)
+    static let completed = Status(id: 3, color: .greenNote, description: "Completed", type: .completed)
 
-    static let mocks = [completed, pending, incompleted]
+    static let mocks = [pending, incompleted, completed]
+
+    var sortOrder: Int {
+        switch description {
+        case "Pending": return 1
+        case "Incompleted": return 2
+        case "Completed": return 3
+        default: return 0
+        }
+    }
+
+    var title: String {
+        description
+    }
 }
 
 // Categories Mocks
