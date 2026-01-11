@@ -6,31 +6,33 @@
 //
 
 internal import SwiftUI
+import SwiftData
 
 struct HomeView: View {
+    // SwiftData
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \Note.date, order: .reverse)
+    private var notes: [Note]
 
-    @Binding var status: Status
-    @Binding var category: CategoryNote
-    @State private var selectedNote: NoteViewModel?
-    @State private var showingModal = false
-    @StateObject var noteViewModel: NoteViewModel
-    @StateObject private var emptynotesListViewModel = NotesListViewModel(
-        repository: EmptyMockNoteRepository()
-    )
-    @StateObject private var notesListViewModel = NotesListViewModel(
-        repository: MockNoteRepository()
-    )
+    // UI State
+    @State private var selectedNote: Note?
+    @State private var showCreateNote = false
 
-    init(
-        status: Binding<Status>,
-        category: Binding<CategoryNote>,
-        noteViewModel: NoteViewModel,
-        repository: NoteRepositoryProtocol = EmptyMockNoteRepository(),
-    ) {
-        self._status = status
-        self._category = category
-        self._noteViewModel = StateObject(wrappedValue: noteViewModel)
-        self._notesListViewModel = StateObject(wrappedValue: NotesListViewModel(repository: repository))
+    // Note Type Counters
+    private var blankCount: Int {
+        notes.filter { $0.status == .blank }.count
+    }
+
+    private var pendingCount: Int {
+        notes.filter { $0.status == .pending }.count
+    }
+
+    private var incompletedCount: Int {
+        notes.filter { $0.status == .incompleted }.count
+    }
+
+    private var completedCount: Int {
+        notes.filter { $0.status == .completed }.count
     }
 
     var body: some View {
@@ -40,40 +42,51 @@ struct HomeView: View {
                 Title()
                 // Status counter
                 StatusNotesCounterView(
-                    blank: notesListViewModel.blankCount,
-                    pending: notesListViewModel.pendingCount,
-                    incompleted: notesListViewModel.incompletedCount,
-                    completed: notesListViewModel.completedCount)
+                    blank: blankCount,
+                    pending: pendingCount,
+                    incompleted: incompletedCount,
+                    completed: completedCount
+                )
                 Rectangle()
                     .fill(Color.gray)
                     .frame(height: 1)
                     .padding(.horizontal)
             }
-            // Notes List View
-            NotesListView(status: $status, category: $category, noteViewModel: NoteViewModel())
+            // Notes List
+            NotesListView()
         }
-        .sheet(item: $selectedNote) {
-            NoteEditView(noteViewModel: $0, status: $status, category: $category)
+        .sheet(item: $selectedNote) { note in
+            NoteEditView(note: note)
         } // Create note button
         .overlay(alignment: .bottomTrailing) {
-            AddNoteView(status: $status, category: $category, noteViewModel: NoteViewModel())
-                .padding(.trailing, 30)
+            Button {
+                createNote()
+            } label: {
+                AddNoteView()
+            }
+            .padding(.trailing, 30)
         }
+    }
+
+    // Actions
+    private func createNote() {
+        let newNote = Note()
+        modelContext.insert(newNote)
+        selectedNote = newNote
     }
 }
 
 #Preview {
-    // Edition mode
-    @Previewable @State var status = Status.mocks[0]
-    @Previewable @State var category = CategoryNote.mocks[0]
-    //    HomeView(status: $status, noteViewModel: NoteViewModel())
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Note.self, configurations: config)
 
-    // Creation mode
-    HomeView(
-        status: $status,
-        category: $category,
-        noteViewModel: NoteViewModel(),
-//        repository: EmptyMockNoteRepository()
-        repository: MockNoteRepository()
-    )
+    let context = container.mainContext
+
+    // Mock data
+    context.insert(Note(title: "Buy milk", text: "2L", status: .pending, category: .shopping))
+    context.insert(Note(title: "Workout", text: "Leg day", status: .completed, category: .health))
+    context.insert(Note(title: "Study SwiftData", text: "WWDC videos", status: .incompleted, category: .studies))
+
+    return HomeView()
+        .modelContainer(container)
 }

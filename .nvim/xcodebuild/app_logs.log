@@ -1,0 +1,8 @@
+2026-01-09 21:42:09.979 ToDoApp[97812:3514620] InjectionClient/Could not connect: Connection refused
+🔥 Unable to connect to InjectionIII app, falling back to standalone HotReloading.
+<SwiftEval: 0x104804bc0>.deinit()
+🔥 ⚠️ HotReloading could find log directory from: /Users/sergio/Library/Developer/Xcode/DerivedData/ToDoApp-hffcqehdcbzlskdwzgukbldrcsvm/SourcePackages/checkouts/SwiftTrace/SwiftTraceGutsD/SwiftTrace.mm
+🔥 Standalone HotReloading available for sources under ["/Users/sergio"]
+2026-01-09 21:42:10.581 ToDoApp[97812:3514614] Simulator slow-motion animations are now off
+🔥 Using logs: /Users/sergio/Library/Developer/Xcode/DerivedData/ToDoApp-hffcqehdcbzlskdwzgukbldrcsvm/Logs/Build/EB8A5B56-C565-4825-8CBF-72A839EE583D.xcactivitylog.
+com.sergiovegap.ToDoApp: 97812

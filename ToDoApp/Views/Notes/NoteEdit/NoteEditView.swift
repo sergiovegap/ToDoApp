@@ -6,9 +6,9 @@
 //
 
 internal import SwiftUI
+import HotReloading
 
 struct NoteEditView: View {
-
     @ObservedObject var noteViewModel: NoteViewModel
     @Binding var status: Status
     @Binding var category: CategoryNote

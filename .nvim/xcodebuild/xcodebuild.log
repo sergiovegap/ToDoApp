@@ -1,0 +1,52 @@
+[H[JResolving Package Graph
+Resolved source packages
+HotReloading - https://github.com/johnno1962/HotReloading.git @ 5.1.0
+ProfileSwiftUI - https://github.com/johnno1962/ProfileSwiftUI @ 1.1.3
+SwiftRegex - https://github.com/johnno1962/SwiftRegex5 @ 6.1.3
+DLKit - https://github.com/johnno1962/DLKit @ 3.5.5
+fishhook - https://github.com/johnno1962/fishhook @ 1.2.1
+XcodebuildNvimPreview - https://github.com/wojciech-kulik/xcodebuild-nvim-preview @ 1.0.11
+HotSwiftUI - https://github.com/johnno1962/HotSwiftUI.git @ 1.2.4
+SwiftTrace - https://github.com/johnno1962/SwiftTrace @ 8.6.1
+RemotePlugin - https://github.com/johnno1962/Remote @ 2.3.5
+XprobePlugin - https://github.com/johnno1962/XprobePlugin @ 2.9.10
+note: Building targets in dependency order
+note: Target dependency graph (23 targets)
+[SwiftTraceD] Processing empty-SwiftTraceD.plist
+[ToDoApp] Processing empty-ToDoApp.plist
+[ToDoApp] Compiling NoteEditView.swift
+[ToDoApp] Copy arm64-apple-ios-simulator.swiftsourceinfo -> ToDoApp.swiftsourceinfo
+[ToDoApp] Copy arm64-apple-ios-simulator.abi.json -> ToDoApp.abi.json
+[ToDoApp] Linking ToDoApp.debug.dylib
+note: Using stub executor library with Swift entry point. (in target 'ToDoApp' from project 'ToDoApp')
+[ToDoApp] Linking ToDoApp
+[ToDoApp] Running script SwiftLint
+[!]  /Volumes/Almacenamiento/Programacion_iOS/SwiftUI/ToDoApp/ToDoApp/Utils/Style/GridContainer.swift:25:6: Opening Brace Spacing Violation: Opening braces should be preceded by a single space and on the same line as the declaration (opening_brace)
+Linting 'Note.swift' (11/26)
+/Volumes/Almacenamiento/Programacion_iOS/SwiftUI/ToDoApp/ToDoApp/SwiftData/ToDoAppApp.swift:28:1: warning: Line Length Violation: Line should be 120 characters or less; currently it has 132 characters (line_length)
+[!]  /Volumes/Almacenamiento/Programacion_iOS/SwiftUI/ToDoApp/ToDoAppUITests/ToDoAppUITests.swift:18:1: Line Length Violation: Line should be 120 characters or less; currently it has 182 characters (line_length)
+Done linting! Found 3 violations, 0 serious in 26 files.
+
+[ToDoApp] Extract App Intents Metadata
+Signing ToDoApp.debug.dylib (in target 'ToDoApp' from project 'ToDoApp')
+Signing __preview.dylib (in target 'ToDoApp' from project 'ToDoApp')
+Signing ToDoApp.app (in target 'ToDoApp' from project 'ToDoApp')
+[ToDoApp] Validate ToDoApp.app
+note: Run script build phase 'SwiftLint' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ToDoApp' from project 'ToDoApp')
+Build Succeeded
+
+-----------------------------
+-- xcodebuild.nvim summary --
+-----------------------------
+
+Warnings:
+   /Volumes/Almacenamiento/Programacion_iOS/SwiftUI/ToDoApp/ToDoApp/Utils/Style/GridContainer.swift:25:6
+    Opening Brace Spacing Violation: Opening braces should be preceded by a single space and on the same line as the declaration (opening_brace)
+   /Volumes/Almacenamiento/Programacion_iOS/SwiftUI/ToDoApp/ToDoApp/SwiftData/ToDoAppApp.swift:28:1
+    Line Length Violation: Line should be 120 characters or less; currently it has 132 characters (line_length)
+   /Volumes/Almacenamiento/Programacion_iOS/SwiftUI/ToDoApp/ToDoAppUITests/ToDoAppUITests.swift:18:1
+    Line Length Violation: Line should be 120 characters or less; currently it has 182 characters (line_length)
+    Done linting! Found 3 violations, 0 serious in 26 files.
+
+  ✔ Build Succeeded
+

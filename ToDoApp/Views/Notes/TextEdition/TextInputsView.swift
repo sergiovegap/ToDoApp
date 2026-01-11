@@ -6,6 +6,7 @@
 //
 
 internal import SwiftUI
+import HotReloading
 
 struct TextInputsView: View {
 
@@ -32,14 +33,14 @@ struct TextInputsView: View {
                                 .foregroundColor(.gray)
                         }.zIndex(1)
                     }
-                        VStack(alignment: .leading) {
-                            TextEditor(text: $description)
-                                .keyboardType(.default)
-                                .frame(minHeight: 100, maxHeight: 200)
-                                .scrollContentBackground(.hidden)
-                            Spacer()
-                        }.zIndex(0)
-                    }
+                    VStack(alignment: .leading) {
+                        TextEditor(text: $description)
+                            .keyboardType(.default)
+                            .frame(minHeight: 100, maxHeight: 200)
+                            .scrollContentBackground(.hidden)
+                        Spacer()
+                    }.zIndex(0)
+                }
             }
         }
         .frame(height: 200)

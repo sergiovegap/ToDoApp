@@ -6,34 +6,31 @@
 //
 
 import Foundation
-internal import SwiftUI
+import SwiftData
 
-struct Note: Identifiable, Equatable {
-    var id: String = UUID().uuidString
-    let title: String
-    let description: String
-    let date: Date
-    let status: Status?
-    let category: CategoryNote?
+@Model
+final class Note {
+    @Attribute(.unique)
+    var id: UUID
+    var title: String
+    var text: String
+    var date: Date
+    var status: StatusType
+    var category: CategoryType
 
     init(
-        id: String,
-        title: String,
-        description: String,
-        date: Date,
-        status: Status,
-        category: CategoryNote,
+        id: UUID = UUID(),
+        title: String = "",
+        text: String = "",
+        date: Date = .now,
+        status: StatusType = .blank,
+        category: CategoryType = .general
     ) {
-        self.id = UUID().uuidString
+        self.id = id
         self.title = title
-        self.description = description
+        self.text = text
         self.date = date
         self.status = status
         self.category = category
     }
-}
-
-struct CategoryNote: Identifiable, Equatable {
-    let id: Int
-    let name: String
 }

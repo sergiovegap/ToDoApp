@@ -8,16 +8,24 @@
 import Foundation
 internal import SwiftUI
 
-enum StatusType {
+enum StatusType: String, Codable, CaseIterable, Identifiable {
     case blank
     case pending
     case incompleted
     case completed
+    
+    var id: String { rawValue }
 }
 
-struct Status: Identifiable, Equatable {
-    let id: Int
-    let color: Color
-    let description: String
-    let type: StatusType
+extension StatusType {
+    var title: String { rawValue }
+
+    var color: Color {
+        switch self {
+        case .blank: Color.white
+        case .pending: .yellowNote
+        case .incompleted: .redNote
+        case .completed: .greenNote
+        }
+    }
 }

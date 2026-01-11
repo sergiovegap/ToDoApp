@@ -6,24 +6,24 @@
 //
 
 internal import SwiftUI
+import SwiftData
 
 struct CategoriesListView: View {
-
-    @Binding var category: CategoryNote
+    @Binding var category: CategoryType
 
     var body: some View {
         VStack(alignment: .leading) {
             Text("Category")
                 .fontWeight(.bold)
             GridContainer(
-                items: CategoryNote.mocks,
+                items: CategoryType.allCases,
                 columns: 3,
                 alignment: .leading,
-                spacing: 15)
-            { mock in
-                Text(mock.name)
+                spacing: 15
+            ) { item in
+                Text(category.title)
                     .font(Font.system(size: 15))
-                    .onTapGesture { category = mock }
+                    .onTapGesture { category = item }
             }
             .gridCellColumns(2)
         }
@@ -31,6 +31,7 @@ struct CategoriesListView: View {
 }
 
 #Preview {
-    @Previewable @State var selectedCategory = CategoryNote.mocks.first!
-    CategoriesListView(category: $selectedCategory)
+    @Previewable @State var selected: CategoryType = .general
+    CategoriesListView(category: $selected)
+        .padding()
 }

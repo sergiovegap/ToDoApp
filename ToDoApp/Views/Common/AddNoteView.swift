@@ -15,7 +15,6 @@ struct AddNoteView: View {
     @StateObject var noteViewModel: NoteViewModel
 
     var body: some View {
-
         Button {
             showingModal = true
         } label: {

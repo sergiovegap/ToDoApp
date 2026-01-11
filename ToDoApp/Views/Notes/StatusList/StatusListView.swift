@@ -6,6 +6,7 @@
 //
 
 internal import SwiftUI
+import HotReloading
 
 struct StatusListView: View {
 
@@ -20,18 +21,19 @@ struct StatusListView: View {
                     items: Status.mocks,
                     columns: 3,
                     alignment: .leading,
-                    spacing: 15) { mock in
-                        HStack {
-                            Circle()
-                                .frame(width: 20)
-                                .foregroundStyle(mock.color)
-                            Text(mock.description)
-                                .font(Font.system(size: 15))
-                        }
-                        .onTapGesture {
-                            status = mock
-                        }
+                    spacing: 15
+                ) { mock in
+                    HStack {
+                        Circle()
+                            .frame(width: 20)
+                            .foregroundStyle(mock.color)
+                        Text(mock.description)
+                            .font(Font.system(size: 15))
                     }
+                    .onTapGesture {
+                        status = mock
+                    }
+                }
             }
         }
     }
