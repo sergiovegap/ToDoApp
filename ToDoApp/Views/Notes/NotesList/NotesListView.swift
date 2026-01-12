@@ -16,32 +16,6 @@ struct NotesListView: View {
     // UI State
     @State private var selectedNote: Note?
 
-    /*
-         @Binding var status: Status
-         @Binding var category: CategoryNote
-         @State private var selectedNote: NoteViewModel?
-         @StateObject var noteViewModel: NoteViewModel
-         @StateObject private var emptynotesListViewModel = NotesListViewModel(
-             repository: EmptyMockNoteRepository()
-         )
-         @StateObject private var notesListViewModel = NotesListViewModel(
-             repository: MockNoteRepository()
-         )
-
-         init(
-             status: Binding<Status>,
-             category: Binding<CategoryNote>,
-             noteViewModel: NoteViewModel,
-     //        repository: NoteRepositoryProtocol = EmptyMockNoteRepository(),
-             repository: NoteRepositoryProtocol = MockNoteRepository()
-         ) {
-             _status = status
-             _category = category
-             _noteViewModel = StateObject(wrappedValue: noteViewModel)
-             _notesListViewModel = StateObject(wrappedValue: NotesListViewModel(repository: repository))
-         }
-         */
-
     var body: some View {
         if notes.isEmpty { // If there are not notes
             NoNotesView()
@@ -49,7 +23,7 @@ struct NotesListView: View {
         } else { // If there are notes
             ScrollView {
                 LazyVGrid(columns: [.init(.flexible())]) {
-                    ForEach(StatusType.allCases, id: \.self) { status in
+                    ForEach(StatusType.allCases) { status in
                         let filteredNotes = notes.filter { $0.status == status }
                         if !filteredNotes.isEmpty {
                             Section {
@@ -59,6 +33,7 @@ struct NotesListView: View {
                                 }
                             } header: {
                                 Text(status.title)
+                                    .textCase(.uppercase)
                                     .font(.headline)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.top, 10)
@@ -86,19 +61,3 @@ struct NotesListView: View {
     return NotesListView()
         .modelContainer(container)
 }
-
-/*
- #Preview {
-     // Edition mode
-     @Previewable @State var status = Status.mocks[0]
-     @Previewable @State var category = CategoryNote.mocks[0]
-
-     NotesListView(
-         status: $status,
-         category: $category,
-         noteViewModel: NoteViewModel(),
- //        repository: EmptyMockNoteRepository())
-         repository: MockNoteRepository()
-     )
- }
- */

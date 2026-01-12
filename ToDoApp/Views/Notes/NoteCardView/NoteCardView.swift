@@ -10,13 +10,11 @@ import SwiftData
 
 struct NoteCardView: View {
     let note: Note
-//    @ObservedObject var noteViewModel: NoteViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             Text(note.title)
                 .font(.caption)
-
             HStack {
                 Text(note.text)
                     .font(.caption)
@@ -37,8 +35,8 @@ struct NoteCardView: View {
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Note.self, configurations: config)
+    let container = PreviewContainer.make()
+    let context = container.mainContext
 
     let note = Note(
         title: "Preview Card",
@@ -51,11 +49,3 @@ struct NoteCardView: View {
         .padding()
         .modelContainer(container)
 }
-
-/*
- #Preview {
-     let note = Note.mocks.first!
-     let noteViewModel = NoteViewModel(note: note)
-     NoteCardView(noteViewModel: noteViewModel)
- }
- */

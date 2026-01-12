@@ -6,11 +6,9 @@
 //
 
 internal import SwiftUI
-import HotReloading
 
 struct StatusListView: View {
-
-    @Binding var status: Status
+    @Binding var status: StatusType
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -18,20 +16,20 @@ struct StatusListView: View {
                 .fontWeight(.bold)
             HStack {
                 GridContainer(
-                    items: Status.mocks,
+                    items: [StatusType.pending, StatusType.incompleted, StatusType.completed],
                     columns: 3,
                     alignment: .leading,
                     spacing: 15
-                ) { mock in
+                ) { type in
                     HStack {
                         Circle()
                             .frame(width: 20)
-                            .foregroundStyle(mock.color)
-                        Text(mock.description)
+                            .foregroundStyle(type.color)
+                        Text(type.title)
                             .font(Font.system(size: 15))
                     }
                     .onTapGesture {
-                        status = mock
+                        status = type
                     }
                 }
             }
@@ -40,6 +38,6 @@ struct StatusListView: View {
 }
 
 #Preview {
-    @Previewable @State var status = Status.mocks[0]
+    @Previewable @State var status = StatusType.pending
     StatusListView(status: $status)
 }

@@ -1,5 +1,5 @@
 //
-//  Category.swift
+//  CategoryType.swift
 //  ToDoApp
 //
 //  Created by Sergio Vega Perera on 10/01/26.
@@ -8,22 +8,20 @@
 import Foundation
 
 enum CategoryType: String, Codable, CaseIterable, Identifiable {
-    case general
-    case shopping
-    case home
-    case finance
-    case development
-    case studies
-    case work
-    case health
-    
-    var id: String { rawValue }
-}
+    case unsettled = "Unsettled"
+    case shopping = "Shopping"
+    case home = "Home"
+    case finance = "Finance"
+    case development = "Development"
+    case studies = "Studies"
+    case work = "Work"
+    case health = "Health"
 
-extension CategoryType {
+    var id: String { rawValue }
+
     var title: String {
         switch self {
-        case .general: "General"
+        case .unsettled: "Unsettled"
         case .shopping: "🛒 Shopping"
         case .home: "🏠 Home"
         case .finance: "💰 Finance"

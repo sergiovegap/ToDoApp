@@ -6,12 +6,13 @@
 //
 
 internal import SwiftUI
-import HotReloading
 
 struct TextInputsView: View {
-
     @Binding var title: String
     @Binding var description: String
+
+    // UI
+    @FocusState private var isDescriptionFocused: Bool
 
     var body: some View {
         HStack(alignment: .top) {
@@ -19,34 +20,48 @@ struct TextInputsView: View {
                 TextField("Title", text: $title)
                     .font(.title)
                     .fontWeight(.bold)
+                    .focused($isDescriptionFocused, equals: false)
                     .scrollContentBackground(.hidden)
                     .background(Color.clear)
                 Rectangle()
                     .fill(Color.gray)
                     .frame(height: 1)
-                ZStack(alignment: .leading) {
+                ZStack(alignment: .topLeading) {
+                    TextEditor(text: $description)
+                        .frame(minHeight: 100, maxHeight: 200)
+                        .scrollContentBackground(.hidden)
                     if description.isEmpty {
-                        VStack(alignment: .leading) {
-                            Text("Write something...")
-                                .padding(.top, 9)
-                                .padding(.leading, 5)
-                                .foregroundColor(.gray)
-                        }.zIndex(1)
+                        Text("Write something...")
+                            .foregroundColor(.gray)
+                            .padding(.top, 8)
+                            .padding(.leading, 5)
                     }
-                    VStack(alignment: .leading) {
-                        TextEditor(text: $description)
-                            .keyboardType(.default)
-                            .frame(minHeight: 100, maxHeight: 200)
-                            .scrollContentBackground(.hidden)
-                        Spacer()
-                    }.zIndex(0)
                 }
+                /*
+                 ZStack(alignment: .leading) {
+                     if description.isEmpty {
+                         VStack(alignment: .leading) {
+                             Text("Write something...")
+                                 .padding(.top, 9)
+                                 .padding(.leading, 5)
+                                 .foregroundColor(.gray)
+                         }.zIndex(1)
+                     }
+                     VStack(alignment: .leading) {
+                         TextEditor(text: $description)
+                             .focused($isDescriptionFocused)
+                             .keyboardType(.default)
+                             .frame(minHeight: 100, maxHeight: 200)
+                             .scrollContentBackground(.hidden)
+                         Spacer()
+                     }.zIndex(0)
+                 }
+                  */
             }
         }
         .frame(height: 200)
         .padding(.top, 35)
-        .padding(.leading)
-        .padding(.trailing)
+        .padding(.horizontal)
     }
 }
 

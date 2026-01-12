@@ -1,5 +1,5 @@
 //
-//  Status.swift
+//  StatusType.swift
 //  ToDoApp
 //
 //  Created by Sergio Vega Perera on 27/12/25.
@@ -13,12 +13,17 @@ enum StatusType: String, Codable, CaseIterable, Identifiable {
     case pending
     case incompleted
     case completed
-    
-    var id: String { rawValue }
-}
 
-extension StatusType {
-    var title: String { rawValue }
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .blank: "Undetermined"
+        case .pending: "Pending"
+        case .incompleted: "Incompleted"
+        case .completed: "Completed"
+        }
+    }
 
     var color: Color {
         switch self {

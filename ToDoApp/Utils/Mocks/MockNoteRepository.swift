@@ -5,6 +5,7 @@
 //  Created by Sergio Vega Perera on 23/12/25.
 //
 
+/*
 import Foundation
 
 protocol NoteRepositoryProtocol {
@@ -32,3 +33,4 @@ class EmptyMockNoteRepository: NoteRepositoryProtocol {
         []
     }
 }
+*/

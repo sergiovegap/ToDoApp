@@ -19,7 +19,7 @@ struct HomeView: View {
     @State private var showCreateNote = false
 
     // Note Type Counters
-    private var blankCount: Int {
+    private var undeterminedCount: Int {
         notes.filter { $0.status == .blank }.count
     }
 
@@ -42,7 +42,7 @@ struct HomeView: View {
                 Title()
                 // Status counter
                 StatusNotesCounterView(
-                    blank: blankCount,
+                    blank: undeterminedCount,
                     pending: pendingCount,
                     incompleted: incompletedCount,
                     completed: completedCount
@@ -77,15 +77,14 @@ struct HomeView: View {
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Note.self, configurations: config)
-
+    let container = PreviewContainer.make()
     let context = container.mainContext
 
     // Mock data
     context.insert(Note(title: "Buy milk", text: "2L", status: .pending, category: .shopping))
     context.insert(Note(title: "Workout", text: "Leg day", status: .completed, category: .health))
     context.insert(Note(title: "Study SwiftData", text: "WWDC videos", status: .incompleted, category: .studies))
+    context.insert(Note(title: "Study UIKit", text: "WWDC videos", status: .blank, category: .unsettled))
 
     return HomeView()
         .modelContainer(container)

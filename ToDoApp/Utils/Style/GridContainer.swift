@@ -44,12 +44,12 @@ where Data: RandomAccessCollection, Data.Element: Identifiable, Content: View {
 }
 
 #Preview {
-    GridContainer(items: Status.mocks, columns: 3, alignment: .leading, spacing: 15) { status in
+    GridContainer(items: StatusType.allCases, columns: 3, alignment: .leading, spacing: 15) { (status: StatusType) in
         HStack {
             Circle()
                 .fill(status.color)
                 .frame(width: 12)
-            Text(status.description)
+            Text(status.title)
                 .font(.subheadline)
         }
     }

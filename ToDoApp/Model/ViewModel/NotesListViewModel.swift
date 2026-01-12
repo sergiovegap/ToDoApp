@@ -5,6 +5,7 @@
 //  Created by Sergio Vega Perera on 23/12/25.
 //
 
+/*
 import Foundation
 internal import Combine
 internal import SwiftUI
@@ -18,7 +19,7 @@ final class NotesListViewModel: ObservableObject {
 
     // Status counters
     var blankCount: Int {
-        notes.filter { $0.status.type == .blank }.count
+        notes.filter { $0.status.color == .blank }.count
     }
     var pendingCount: Int {
         notes.filter { $0.status.type == .pending }.count
@@ -43,7 +44,7 @@ final class NotesListViewModel: ObservableObject {
         notes = vms.sorted { $0.status.sortOrder < $1.status.sortOrder }
     }
 
-    func orderNotes(for status: Status) -> [NoteViewModel] {
+    func orderNotes(for status: StatusType) -> [NoteViewModel] {
         self.notes.filter { $0.status.id == status.id }
     }
 
@@ -73,9 +74,10 @@ final class NotesListViewModel: ObservableObject {
                 title: $0.title,
                 description: $0.description,
                 date: $0.date,
-                status: Status.mocks.first { $0.description == $0.description }!,
-                category: CategoryNote.mocks.first { $0.name == $0.name }!)
+                status: StatusType.mocks.first { $0.description == $0.description }!,
+                category: CategoryType.mocks.first { $0.name == $0.name }!)
         }
         repository.save(domainNotes)
     }
 }
+*/

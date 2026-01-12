@@ -6,16 +6,19 @@
 //
 
 internal import SwiftUI
+import SwiftData
 
 struct AddNoteView: View {
 
-    @Binding var status: Status
-    @Binding var category: CategoryNote
+    @Environment(\.modelContext) private var context
     @State private var showingModal = false
-    @StateObject var noteViewModel: NoteViewModel
+    @State private var newNote: Note?
 
     var body: some View {
         Button {
+            let note = Note()
+            context.insert(note)
+            newNote = note
             showingModal = true
         } label: {
             ZStack {
@@ -30,8 +33,8 @@ struct AddNoteView: View {
                         .shadow(color: Color.gray, radius: 4)
                 }
             )
-            .sheet(isPresented: $showingModal) {
-                NoteEditView(noteViewModel: noteViewModel, status: $status, category: $category)
+            .sheet(item: $newNote) { note in
+                NoteEditView(note: note)
                     .foregroundStyle(Color.black)
             }
         }
@@ -39,9 +42,7 @@ struct AddNoteView: View {
 }
 
 #Preview {
-    @Previewable @State var status = Status.mocks[0]
-    @Previewable @State var category = CategoryNote.mocks[0]
-    let note = Note.mocks.first!
-    let noteViewModel = NoteViewModel(note: note)
-    AddNoteView(status: $status, category: $category, noteViewModel: noteViewModel)
+    let container = PreviewContainer.make()
+    return AddNoteView()
+        .modelContainer(container)
 }

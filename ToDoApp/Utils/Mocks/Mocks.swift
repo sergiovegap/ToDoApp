@@ -5,6 +5,7 @@
 //  Created by Sergio Vega Perera on 22/12/25.
 //
 
+/*
 import Foundation
 internal import SwiftUI
 
@@ -98,3 +99,4 @@ extension Note {
         )
     ]
 }
+*/

@@ -16,12 +16,12 @@ struct CategoriesListView: View {
             Text("Category")
                 .fontWeight(.bold)
             GridContainer(
-                items: CategoryType.allCases,
+                items: CategoryType.allCases.filter { $0 != .unsettled },
                 columns: 3,
                 alignment: .leading,
                 spacing: 15
             ) { item in
-                Text(category.title)
+                Text(item.title)
                     .font(Font.system(size: 15))
                     .onTapGesture { category = item }
             }
@@ -31,7 +31,7 @@ struct CategoriesListView: View {
 }
 
 #Preview {
-    @Previewable @State var selected: CategoryType = .general
+    @Previewable @State var selected: CategoryType = .finance
     CategoriesListView(category: $selected)
         .padding()
 }

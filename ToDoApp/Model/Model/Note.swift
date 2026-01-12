@@ -24,7 +24,7 @@ final class Note {
         text: String = "",
         date: Date = .now,
         status: StatusType = .blank,
-        category: CategoryType = .general
+        category: CategoryType = .unsettled
     ) {
         self.id = id
         self.title = title

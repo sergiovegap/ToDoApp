@@ -16,9 +16,13 @@ enum PreviewContainer {
             isStoredInMemoryOnly: true
         )
 
-        return try! ModelContainer(
-            for: schema,
-            configurations: [config]
-        )
+        do {
+            return try ModelContainer(
+                for: schema,
+                configurations: [config]
+            )
+        } catch {
+            fatalError("Failed to create preview ModelContainer: \(error)")
+        }
     }
 }

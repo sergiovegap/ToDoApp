@@ -6,22 +6,20 @@
 //
 
 internal import SwiftUI
-import HotReloading
+import SwiftData
 
 struct NoteEditView: View {
-    @ObservedObject var noteViewModel: NoteViewModel
-    @Binding var status: Status
-    @Binding var category: CategoryNote
+    @Bindable var note: Note
 
     var body: some View {
         FullSizeContainer {
             ScrollView {
                 // Text Inputs
-                TextInputsView(title: $noteViewModel.title, description: $noteViewModel.description)
+                TextInputsView(title: $note.title, description: $note.text)
                 // Categories $ Status List
                 VStack(spacing: 25) {
-                    CategoriesListView(category: $noteViewModel.category)
-                    StatusListView(status: $noteViewModel.status)
+                    CategoriesListView(category: $note.category)
+                    StatusListView(status: $note.status)
                 }
                 .padding()
             }
@@ -30,13 +28,18 @@ struct NoteEditView: View {
 }
 
 #Preview {
-    // Edition mode
-    @Previewable @State var status = Status.mocks[0]
-    @Previewable @State var category = CategoryNote.mocks[0]
-//    let note = Note.mocks.first!
-//    let noteViewModel = NoteViewModel(note: note)
-//    NoteEditView(noteViewModel: noteViewModel, status: $status)
+    let container = PreviewContainer.make()
+    let context = container.mainContext
 
-    // Creation mode
-    NoteEditView(noteViewModel: NoteViewModel(), status: $status, category: $category)
+    let note = Note(
+        title: "Preview Card",
+        text: "This is how a note card looks in isolation",
+        status: .pending,
+        category: .work
+    )
+
+    context.insert(note)
+
+    return NoteEditView(note: note)
+        .modelContainer(container)
 }

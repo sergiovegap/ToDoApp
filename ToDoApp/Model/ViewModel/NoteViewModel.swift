@@ -5,6 +5,7 @@
 //  Created by Sergio Vega Perera on 22/12/25.
 //
 
+/*
 import Foundation
 internal import SwiftUI
 internal import Combine
@@ -25,8 +26,8 @@ final class NoteViewModel: ObservableObject, Identifiable, Hashable {
     @Published var title: String
     @Published var description: String
     @Published var date: Date
-    @Published var status: Status
-    @Published var category: CategoryNote
+    @Published var status: StatusType
+    @Published var category: CategoryType
 
     // Create note
     init() {
@@ -34,8 +35,8 @@ final class NoteViewModel: ObservableObject, Identifiable, Hashable {
         self.title = ""
         self.description = ""
         self.date = Date()
-        self.status = Status.mocks[0]
-        self.category = CategoryNote.mocks[0]
+        self.status = StatusType.mocks[0]
+        self.category = CategoryType.mocks[0]
     }
 
     // Edit note
@@ -59,3 +60,4 @@ final class NoteViewModel: ObservableObject, Identifiable, Hashable {
         )
     }
 }
+*/
