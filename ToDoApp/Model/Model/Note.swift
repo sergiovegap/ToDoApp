@@ -10,8 +10,7 @@ import SwiftData
 
 @Model
 final class Note {
-    @Attribute(.unique)
-    var id: UUID
+    @Attribute(.unique) var id: UUID
     var title: String
     var text: String
     var date: Date

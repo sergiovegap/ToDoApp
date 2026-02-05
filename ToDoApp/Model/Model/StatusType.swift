@@ -27,7 +27,7 @@ enum StatusType: String, Codable, CaseIterable, Identifiable {
 
     var color: Color {
         switch self {
-        case .blank: Color.white
+        case .blank: .platinumNote
         case .pending: .yellowNote
         case .incompleted: .redNote
         case .completed: .greenNote

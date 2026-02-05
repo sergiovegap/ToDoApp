@@ -10,11 +10,16 @@ import SwiftData
 
 struct NotesListView: View {
     // SwiftData
+    @Environment(\.modelContext) private var context
     @Query(sort: \Note.date, order: .reverse)
     private var notes: [Note]
 
+    private func delete(_ note: Note) {
+        context.delete(note)
+    }
+
     // UI State
-    @State private var selectedNote: Note?
+    @Binding var selectedNote: Note?
 
     var body: some View {
         if notes.isEmpty { // If there are not notes
@@ -30,6 +35,13 @@ struct NotesListView: View {
                                 ForEach(filteredNotes) { note in
                                     NoteCardView(note: note)
                                         .onTapGesture { selectedNote = note }
+                                        .swipeActions(edge: .leading) {
+                                            Button(role: .destructive) {
+                                                delete(note)
+                                            } label: {
+                                                Label("Delete", systemImage: "trash")
+                                            }
+                                        }
                                 }
                             } header: {
                                 Text(status.title)
@@ -48,6 +60,7 @@ struct NotesListView: View {
 }
 
 #Preview {
+    @Previewable @State var selectedNote: Note?
     let container = PreviewContainer.make()
     let context = container.mainContext
 
@@ -56,8 +69,8 @@ struct NotesListView: View {
     context.insert(Note(title: "Workout", text: "Leg day at gym", status: .completed, category: .health))
     context.insert(Note(title: "Study SwiftData", text: "Watch WWDC sessions", status: .incompleted, category: .studies))
     context.insert(Note(title: "Pay bills", text: "Electricity and water", status: .pending, category: .finance))
-    context.insert(Note(title: "Clean house", text: "Living room and kitchen", status: .blank, category: .home))
+    context.insert(Note(title: "Clean house", text: "Living room and kitchen", status: .blank, category: .unsettled))
 
-    return NotesListView()
+    return NotesListView(selectedNote: $selectedNote)
         .modelContainer(container)
 }

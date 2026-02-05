@@ -8,20 +8,21 @@
 import Foundation
 
 enum CategoryType: String, Codable, CaseIterable, Identifiable {
-    case unsettled = "Unsettled"
-    case shopping = "Shopping"
-    case home = "Home"
-    case finance = "Finance"
-    case development = "Development"
-    case studies = "Studies"
-    case work = "Work"
-    case health = "Health"
+    case unsettled
+    case shopping
+    case home
+    case finance
+    case development
+    case studies
+    case work
+    case health
+    case social
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
-        case .unsettled: "Unsettled"
+        case .unsettled: ""
         case .shopping: "🛒 Shopping"
         case .home: "🏠 Home"
         case .finance: "💰 Finance"
@@ -29,6 +30,7 @@ enum CategoryType: String, Codable, CaseIterable, Identifiable {
         case .studies: "📚 Studies"
         case .work: "💼 Work"
         case .health: "💪 Health"
+        case .social: "👥 Social"
         }
     }
 }

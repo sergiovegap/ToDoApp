@@ -15,7 +15,7 @@ struct HomeView: View {
     private var notes: [Note]
 
     // UI State
-    @State private var selectedNote: Note?
+    @State var selectedNote: Note?
     @State private var showCreateNote = false
 
     // Note Type Counters
@@ -53,7 +53,7 @@ struct HomeView: View {
                     .padding(.horizontal)
             }
             // Notes List
-            NotesListView()
+            NotesListView(selectedNote: $selectedNote)
         }
         .sheet(item: $selectedNote) { note in
             NoteEditView(note: note)
@@ -80,11 +80,12 @@ struct HomeView: View {
     let container = PreviewContainer.make()
     let context = container.mainContext
 
-    // Mock data
-    context.insert(Note(title: "Buy milk", text: "2L", status: .pending, category: .shopping))
-    context.insert(Note(title: "Workout", text: "Leg day", status: .completed, category: .health))
-    context.insert(Note(title: "Study SwiftData", text: "WWDC videos", status: .incompleted, category: .studies))
-    context.insert(Note(title: "Study UIKit", text: "WWDC videos", status: .blank, category: .unsettled))
+    // Mock notes
+    context.insert(Note(title: "Buy milk", text: "2L of milk", status: .pending, category: .shopping))
+    context.insert(Note(title: "Workout", text: "Leg day at gym", status: .completed, category: .health))
+    context.insert(Note(title: "Study SwiftData", text: "Watch WWDC sessions", status: .incompleted, category: .studies))
+    context.insert(Note(title: "Pay bills", text: "Electricity and water", status: .pending, category: .finance))
+    context.insert(Note(title: "Clean house", text: "Living room and kitchen", status: .blank, category: .unsettled))
 
     return HomeView()
         .modelContainer(container)

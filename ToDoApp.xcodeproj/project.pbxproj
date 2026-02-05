@@ -6,12 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		494310432F1192960059F2E3 /* HotSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 494310422F1192960059F2E3 /* HotSwiftUI */; };
-		494310482F11E44C0059F2E3 /* HotReloading in Frameworks */ = {isa = PBXBuildFile; productRef = 494310472F11E44C0059F2E3 /* HotReloading */; };
-		4968165E2F10170B00B2B045 /* XcodebuildNvimPreview in Frameworks */ = {isa = PBXBuildFile; productRef = 4968165D2F10170B00B2B045 /* XcodebuildNvimPreview */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		499A51692EF9CE3800E87D6A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -58,9 +52,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				494310482F11E44C0059F2E3 /* HotReloading in Frameworks */,
-				494310432F1192960059F2E3 /* HotSwiftUI in Frameworks */,
-				4968165E2F10170B00B2B045 /* XcodebuildNvimPreview in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,9 +121,6 @@
 			);
 			name = ToDoApp;
 			packageProductDependencies = (
-				4968165D2F10170B00B2B045 /* XcodebuildNvimPreview */,
-				494310422F1192960059F2E3 /* HotSwiftUI */,
-				494310472F11E44C0059F2E3 /* HotReloading */,
 			);
 			productName = ToDoApp;
 			productReference = 499A51592EF9CE3500E87D6A /* ToDoApp.app */;
@@ -217,9 +205,6 @@
 			mainGroup = 499A51502EF9CE3500E87D6A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				496816592F10151A00B2B045 /* XCRemoteSwiftPackageReference "xcodebuild-nvim-preview" */,
-				494310412F1192960059F2E3 /* XCRemoteSwiftPackageReference "HotSwiftUI" */,
-				494310462F11E44C0059F2E3 /* XCRemoteSwiftPackageReference "HotReloading" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 499A515A2EF9CE3500E87D6A /* Products */;
@@ -633,51 +618,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		494310412F1192960059F2E3 /* XCRemoteSwiftPackageReference "HotSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/johnno1962/HotSwiftUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.4;
-			};
-		};
-		494310462F11E44C0059F2E3 /* XCRemoteSwiftPackageReference "HotReloading" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/johnno1962/HotReloading.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.11;
-			};
-		};
-		496816592F10151A00B2B045 /* XCRemoteSwiftPackageReference "xcodebuild-nvim-preview" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/wojciech-kulik/xcodebuild-nvim-preview";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.11;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		494310422F1192960059F2E3 /* HotSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 494310412F1192960059F2E3 /* XCRemoteSwiftPackageReference "HotSwiftUI" */;
-			productName = HotSwiftUI;
-		};
-		494310472F11E44C0059F2E3 /* HotReloading */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 494310462F11E44C0059F2E3 /* XCRemoteSwiftPackageReference "HotReloading" */;
-			productName = HotReloading;
-		};
-		4968165D2F10170B00B2B045 /* XcodebuildNvimPreview */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 496816592F10151A00B2B045 /* XCRemoteSwiftPackageReference "xcodebuild-nvim-preview" */;
-			productName = XcodebuildNvimPreview;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 499A51512EF9CE3500E87D6A /* Project object */;
 }

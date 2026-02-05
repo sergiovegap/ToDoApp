@@ -16,7 +16,7 @@ struct NoteCardView: View {
             Text(note.title)
                 .font(.caption)
             HStack {
-                Text(note.text)
+                Text(note.category.title)
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .lineLimit(2)
@@ -41,8 +41,8 @@ struct NoteCardView: View {
     let note = Note(
         title: "Preview Card",
         text: "This is how a note card looks in isolation.",
-        status: .pending,
-        category: .work
+        status: .blank,
+        category: .unsettled
     )
 
     return NoteCardView(note: note)
