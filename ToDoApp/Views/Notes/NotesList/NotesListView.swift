@@ -26,35 +26,38 @@ struct NotesListView: View {
             NoNotesView()
                 .animation(.easeInOut, value: notes.count)
         } else { // If there are notes
-            ScrollView {
-                LazyVGrid(columns: [.init(.flexible())]) {
-                    ForEach(StatusType.allCases) { status in
-                        let filteredNotes = notes.filter { $0.status == status }
-                        if !filteredNotes.isEmpty {
-                            Section {
-                                ForEach(filteredNotes) { note in
-                                    NoteCardView(note: note)
-                                        .onTapGesture { selectedNote = note }
-                                        .swipeActions(edge: .leading) {
-                                            Button(role: .destructive) {
-                                                delete(note)
-                                            } label: {
-                                                Label("Delete", systemImage: "trash")
-                                            }
+            List {
+                ForEach(StatusType.allCases, id: \.self) { status in
+                    let filteredNotes = notes.filter { $0.status == status }
+                    if !filteredNotes.isEmpty {
+                        Section {
+                            ForEach(filteredNotes) { note in
+                                NoteCardView(note: note)
+                                    .listRowSeparator(.hidden, edges: .all)
+                                    .listRowInsets(.init(top: 6, leading: 16, bottom: 6, trailing: 16))
+                                    .listRowBackground(Color.clear)
+                                    .onTapGesture { selectedNote = note }
+                                    .swipeActions(edge: .trailing) {
+                                        Button(role: .destructive) {
+                                            delete(note)
+                                        } label: {
+                                            Label("Delete", systemImage: "trash")
                                         }
-                                }
-                            } header: {
-                                Text(status.title)
-                                    .textCase(.uppercase)
-                                    .font(.headline)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.top, 10)
+                                    }
                             }
+                        } header: {
+                            Text(status.title)
+                                .textCase(.uppercase)
+                                .font(.headline)
+                                .padding(.bottom, 2)
                         }
+                        .headerProminence(.increased)
                     }
                 }
             }
-            .padding()
+            .listStyle(.plain)
+            .listSectionSpacing(0.0)
+            .scrollContentBackground(.hidden)
         }
     }
 }
