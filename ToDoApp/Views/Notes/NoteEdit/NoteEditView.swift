@@ -9,21 +9,52 @@ internal import SwiftUI
 import SwiftData
 
 struct NoteEditView: View {
+    // SwiftData
     @Bindable var note: Note
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
-        FullSizeContainer {
-            ScrollView {
-                // Text Inputs
-                TextInputsView(title: $note.title, description: $note.text)
-                // Categories $ Status List
-                VStack(spacing: 25) {
-                    CategoriesListView(category: $note.category)
-                    StatusListView(status: $note.status)
+        VStack(spacing: 0) {
+            HStack {
+                Spacer()
+                Button {
+                    if !note.title.isEmpty && !note.text.isEmpty {
+                        createNote(note: note)
+                    }
+                } label: {
+                    Image(systemName: "checkmark.circle.dotted")
+                        .font(.largeTitle)
+                        .foregroundColor(.black)
                 }
-                .padding()
+                .frame(height: .infinity)
+                .padding(.trailing, 20)
+                .padding(.top, 20)
+            }
+            .background(.clear)
+            FullSizeContainer {
+                ScrollView {
+                    // Text Inputs
+                    TextInputsView(title: $note.title, description: $note.text)
+                    // Categories $ Status List
+                    VStack(spacing: 25) {
+                        CategoriesListView(category: $note.category)
+                        StatusListView(status: $note.status)
+                    }
+                    .padding()
+                }
+            }
+            .onDisappear {
+                if note.title.isEmpty && note.text.isEmpty {
+                    modelContext.delete(note)
+                }
             }
         }
+    }
+
+    // Actions
+    private func createNote(note: Note) {
+        modelContext.insert(note)
     }
 }
 

@@ -57,22 +57,14 @@ struct HomeView: View {
         }
         .sheet(item: $selectedNote) { note in
             NoteEditView(note: note)
-        } // Create note button
+        }
+        // Create note button
         .overlay(alignment: .bottomTrailing) {
-            Button {
-                createNote()
-            } label: {
+            Button {} label: {
                 AddNoteView()
             }
             .padding(.trailing, 30)
         }
-    }
-
-    // Actions
-    private func createNote() {
-        let newNote = Note()
-        modelContext.insert(newNote)
-        selectedNote = newNote
     }
 }
 
