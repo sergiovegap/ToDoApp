@@ -14,14 +14,15 @@ struct NoteEditView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
 
+    // UI
+    @FocusState.Binding var isInputFocused: Bool
+
     var body: some View {
         VStack(spacing: 0) {
             HStack {
                 Spacer()
                 Button {
-                    if !note.title.isEmpty && !note.text.isEmpty {
-                        createNote(note: note)
-                    }
+                    createNote(note: note)
                 } label: {
                     Image(systemName: "checkmark.circle.dotted")
                         .font(.largeTitle)
@@ -35,18 +36,13 @@ struct NoteEditView: View {
             FullSizeContainer {
                 ScrollView {
                     // Text Inputs
-                    TextInputsView(title: $note.title, description: $note.text)
+                    TextInputsView(title: $note.title, description: $note.text, isInputFocused: $isInputFocused)
                     // Categories $ Status List
                     VStack(spacing: 25) {
                         CategoriesListView(category: $note.category)
                         StatusListView(status: $note.status)
                     }
                     .padding()
-                }
-            }
-            .onDisappear {
-                if note.title.isEmpty && note.text.isEmpty {
-                    modelContext.delete(note)
                 }
             }
         }
@@ -59,6 +55,7 @@ struct NoteEditView: View {
 }
 
 #Preview {
+    @Previewable @FocusState var isInputFocused: Bool
     let container = PreviewContainer.make()
     let context = container.mainContext
 
@@ -71,6 +68,6 @@ struct NoteEditView: View {
 
     context.insert(note)
 
-    return NoteEditView(note: note)
+    return NoteEditView(note: note, isInputFocused: $isInputFocused)
         .modelContainer(container)
 }

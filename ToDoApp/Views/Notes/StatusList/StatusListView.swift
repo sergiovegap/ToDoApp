@@ -23,8 +23,12 @@ struct StatusListView: View {
                 ) { type in
                     HStack {
                         Circle()
-                            .frame(width: 20)
                             .foregroundStyle(type.color)
+                            .overlay(
+                                Circle()
+                                    .strokeBorder(Color.black, lineWidth: 1)
+                            )
+                            .frame(width: 20)
                         Text(type.title)
                             .font(Font.system(size: 15))
                     }

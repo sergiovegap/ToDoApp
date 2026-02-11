@@ -16,7 +16,8 @@ struct HomeView: View {
 
     // UI State
     @State var selectedNote: Note?
-    @State private var showCreateNote = false
+    @State private var showCreateNoteSheet = false
+    @FocusState var isInputFocused: Bool
 
     // Note Type Counters
     private var undeterminedCount: Int {
@@ -55,12 +56,19 @@ struct HomeView: View {
             // Notes List
             NotesListView(selectedNote: $selectedNote)
         }
+        // Selected note
         .sheet(item: $selectedNote) { note in
-            NoteEditView(note: note)
+            NoteEditView(note: note, isInputFocused: $isInputFocused)
+        }
+        // Create note view
+        .sheet(isPresented: $showCreateNoteSheet) {
+            CreateNoteView(isInputFocused: $isInputFocused)
         }
         // Create note button
         .overlay(alignment: .bottomTrailing) {
-            Button {} label: {
+            Button {
+                showCreateNoteSheet = true
+            } label: {
                 AddNoteView()
             }
             .padding(.trailing, 30)
@@ -75,7 +83,7 @@ struct HomeView: View {
     // Mock notes
     context.insert(Note(title: "Buy milk", text: "2L of milk", status: .pending, category: .shopping))
     context.insert(Note(title: "Workout", text: "Leg day at gym", status: .completed, category: .health))
-    context.insert(Note(title: "Study SwiftData", text: "Watch WWDC sessions", status: .incompleted, category: .studies))
+    context.insert(Note(title: "Study SwiftData", text: "Watch WWDC session", status: .incompleted, category: .studies))
     context.insert(Note(title: "Pay bills", text: "Electricity and water", status: .pending, category: .finance))
     context.insert(Note(title: "Clean house", text: "Living room and kitchen", status: .blank, category: .unsettled))
 

@@ -33,4 +33,13 @@ enum StatusType: String, Codable, CaseIterable, Identifiable {
         case .completed: .greenNote
         }
     }
+
+    var image: String {
+        switch self {
+        case .blank: "questionmark"
+        case .pending: "hourglass"
+        case .incompleted: "exclamationmark.triangle"
+        case .completed: "checkmark.square"
+        }
+    }
 }

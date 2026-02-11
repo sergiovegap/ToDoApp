@@ -15,7 +15,7 @@ struct NoNotesView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 150)
-                Text("No notes yet")
+                Text("No notes here")
                     .font(.title)
                     .fontWeight(.bold)
             }

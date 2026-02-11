@@ -46,10 +46,9 @@ struct NotesListView: View {
                                     }
                             }
                         } header: {
-                            Text(status.title)
+                            Label(status.title, systemImage: status.image)
                                 .textCase(.uppercase)
                                 .font(.headline)
-                                .padding(.bottom, 2)
                         }
                         .headerProminence(.increased)
                     }
@@ -70,7 +69,7 @@ struct NotesListView: View {
     // Mock notes
     context.insert(Note(title: "Buy milk", text: "2L of milk", status: .pending, category: .shopping))
     context.insert(Note(title: "Workout", text: "Leg day at gym", status: .completed, category: .health))
-    context.insert(Note(title: "Study SwiftData", text: "Watch WWDC sessions", status: .incompleted, category: .studies))
+    context.insert(Note(title: "Study SwiftData", text: "Watch WWDC session", status: .incompleted, category: .studies))
     context.insert(Note(title: "Pay bills", text: "Electricity and water", status: .pending, category: .finance))
     context.insert(Note(title: "Clean house", text: "Living room and kitchen", status: .blank, category: .unsettled))
 
